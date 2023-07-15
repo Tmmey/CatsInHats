@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Component to spawn trash to fall from the top of the screen.
+/// Component to spawn cat to fall from the top of the screen.
 /// </summary>
 public class SpawnController : MonoBehaviour
 {
@@ -9,7 +9,7 @@ public class SpawnController : MonoBehaviour
     private float maxSpawnVelocity;
 
     [SerializeField]
-    private Trash[] spawnables;
+    private Cat[] spawnables;
 
     [SerializeField]
     private float minSpawnTime = 0.25f;
@@ -30,12 +30,12 @@ public class SpawnController : MonoBehaviour
     }
     private void Spawn()
     {
-        Trash randomTrash = spawnables[Random.Range(0, spawnables.Length)];
-        Trash spawnedTrash = Instantiate(randomTrash);
+        Cat randomCat = spawnables[Random.Range(0, spawnables.Length)];
+        Cat spawnedCat = Instantiate(randomCat);
 
         // Apply some initial velocity
-        var trashRigidBody = spawnedTrash.GetComponent<Rigidbody2D>();
-        if (trashRigidBody != null)
+        var catRigidBody = spawnedCat.GetComponent<Rigidbody2D>();
+        if (catRigidBody != null)
         {
             Vector2 randomVelocity = Random.insideUnitCircle * maxSpawnVelocity;
 
@@ -45,11 +45,11 @@ public class SpawnController : MonoBehaviour
                 randomVelocity.y = -randomVelocity.y;
             }
 
-            trashRigidBody.velocity = randomVelocity;
+            catRigidBody.velocity = randomVelocity;
         }
 
         var spawnPosition = new Vector2(Random.Range(minX, maxX), transform.position.y);
-        spawnedTrash.transform.position = spawnPosition;
+        spawnedCat.transform.position = spawnPosition;
 
         // Queue next spawn
         Invoke(nameof(Spawn), Random.Range(minSpawnTime, maxSpawnTime));

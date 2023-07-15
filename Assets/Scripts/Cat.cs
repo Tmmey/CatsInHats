@@ -5,10 +5,10 @@ using UnityEngine;
 /// Trash item that falls from the top of the screen and can be swiped over to launch into a bin.
 /// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
-public class Trash : MonoBehaviour
+public class Cat : MonoBehaviour
 {
     [SerializeField]
-    private TrashType trashType;
+    private CatType catType;
 
     [SerializeField]
     private TrailRenderer trail;
@@ -17,11 +17,11 @@ public class Trash : MonoBehaviour
     private int launchedLayerId;
 
     /// <summary>
-    /// Gets whether this trash has been flung before.
+    /// Gets whether this cat has been flung before.
     /// </summary>
     public bool HasFlung { get; set; }
 
-    public TrashType Type => trashType;
+    public CatType Type => catType;
 
     /// <summary>
     /// Cache our components.
@@ -37,7 +37,7 @@ public class Trash : MonoBehaviour
     }
 
     /// <summary>
-    /// Launch this trash at the given bin.
+    /// Launch this cat at the given bin.
     /// </summary>
     /// <param name="target">The target to launch at, in world space.</param>
     /// <param name="velocity">The speed to launch at, in world units per second.</param>

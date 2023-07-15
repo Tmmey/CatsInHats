@@ -6,7 +6,7 @@ using UnityEngine;
 public class Bin : MonoBehaviour
 {
     [SerializeField]
-    private TrashType trashType;
+    private CatType catType;
     [SerializeField]
     private int correctScore = 1;
     [SerializeField]
@@ -29,13 +29,13 @@ public class Bin : MonoBehaviour
             return;
         }
 
-        // Try find trash on there
-        var trash = other.GetComponent<Trash>();
+        // Try find cat on there
+        var cat = other.GetComponent<Cat>();
 
-        if (trash != null)
+        if (cat != null)
         {
-            cachedScoreController.AddScore(trash.Type == trashType ? correctScore : incorrectScore);
-            Destroy(trash.gameObject);
+            cachedScoreController.AddScore(cat.Type == catType ? correctScore : incorrectScore);
+            Destroy(cat.gameObject);
         }
     }
 }

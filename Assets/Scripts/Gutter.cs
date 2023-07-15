@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Simple object to catch trash that falls off the screen.
+/// Simple object to catch cat that falls off the screen.
 /// </summary>
 public class Gutter : MonoBehaviour
 {
@@ -25,13 +25,13 @@ public class Gutter : MonoBehaviour
             return;
         }
 
-        // Try find trash on there
-        var trash = other.GetComponent<Trash>();
+        // Try find cat on there
+        var cat = other.GetComponent<Cat>();
 
-        if (trash != null)
+        if (cat != null)
         {
             cachedScoreController.AddScore(gutterScore);
-            Destroy(trash.gameObject);
+            Destroy(cat.gameObject);
         }
     }
 }

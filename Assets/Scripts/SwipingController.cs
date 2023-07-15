@@ -23,9 +23,9 @@ public class SwipingController : MonoBehaviour
     private float minimumCosineForBinTargetting = 0.75f;
 
     /// <summary>
-    /// Mapping of input IDs to 'grabbed' trash.
+    /// Mapping of input IDs to 'grabbed' cat.
     /// </summary>
-    private readonly Dictionary<int, Trash> swipeMapping = new Dictionary<int, Trash>();
+    private readonly Dictionary<int, Cat> swipeMapping = new Dictionary<int, Cat>();
 
     private Camera cachedCamera;
     private int castLayerMask;
@@ -63,19 +63,19 @@ public class SwipingController : MonoBehaviour
 
     private void OnSwiped(SwipeInput input)
     {
-        // Try find a grabbed trash for this swipe
-        Trash swipedTrash;
+        // Try find a grabbed cat for this swipe
+        Cat swipedCat;
 
-        if (!swipeMapping.TryGetValue(input.InputId, out swipedTrash))
+        if (!swipeMapping.TryGetValue(input.InputId, out swipedCat))
         {
             return;
         }
 
         swipeMapping.Remove(input.InputId);
 
-        // Launch trash at target if it hasn't been launched yet
-        if (swipedTrash == null ||
-            swipedTrash.HasFlung)
+        // Launch cat at target if it hasn't been launched yet
+        if (swipedCat == null ||
+            swipedCat.HasFlung)
         {
             return;
         }
@@ -84,9 +84,9 @@ public class SwipingController : MonoBehaviour
         Bin targetBin = FindTargetBinForSwipe(input);
         Vector2 targetPosition = targetBin != null
             ? targetBin.transform.position
-            : swipedTrash.transform.position + (Vector3)input.SwipeDirection;
+            : swipedCat.transform.position + (Vector3)input.SwipeDirection;
 
-        swipedTrash.LaunchAt(targetPosition, input.SwipeVelocity * screenUnitsToWorldUnits);
+        swipedCat.LaunchAt(targetPosition, input.SwipeVelocity * screenUnitsToWorldUnits);
     }
 
     private void OnPressed(SwipeInput input)
@@ -94,27 +94,27 @@ public class SwipingController : MonoBehaviour
         // Make sure that the swipe mapping doesn't contain this swipe
         swipeMapping.Remove(input.InputId);
 
-        // Try also find grabbed trash on first press
+        // Try also find grabbed cat on first press
         Vector2 worldCurrent = cachedCamera.ScreenToWorldPoint(input.EndPosition);
 
-        // Try find trash to grab for this touch
+        // Try find cat to grab for this touch
         Collider2D collider = Physics2D.OverlapPoint(worldCurrent, castLayerMask);
         if (collider != null)
         {
-            // Try find a Trash object on this hit component
-            var trash = collider.GetComponent<Trash>();
-            if (trash != null &&
-                !trash.HasFlung)
+            // Try find a Cat object on this hit component
+            var cat = collider.GetComponent<Cat>();
+            if (cat != null &&
+                !cat.HasFlung)
             {
                 // Remember that this swipe went over this object
-                swipeMapping[input.InputId] = trash;
+                swipeMapping[input.InputId] = cat;
             }
         }
     }
 
     private void OnDragged(SwipeInput input)
     {
-        // If this input's already picked up some trash, ignore this
+        // If this input's already picked up some cat, ignore this
         if (swipeMapping.ContainsKey(input.InputId))
         {
             return;
@@ -123,17 +123,17 @@ public class SwipingController : MonoBehaviour
         Vector2 worldPrevious = cachedCamera.ScreenToWorldPoint(input.PreviousPosition);
         Vector2 worldCurrent = cachedCamera.ScreenToWorldPoint(input.EndPosition);
 
-        //Try find trash to grab for this swipe
+        //Try find cat to grab for this swipe
         RaycastHit2D hit = Physics2D.Linecast(worldPrevious, worldCurrent, castLayerMask);
         if (hit.collider != null)
         {
-            // Try find a Trash object on this hit component
-            var trash = hit.collider.GetComponent<Trash>();
-            if (trash != null &&
-                !trash.HasFlung)
+            // Try find a Cat object on this hit component
+            var cat = hit.collider.GetComponent<Cat>();
+            if (cat != null &&
+                !cat.HasFlung)
             {
                 // Remember that this swipe went over this object
-                swipeMapping[input.InputId] = trash;
+                swipeMapping[input.InputId] = cat;
             }
         }
     }
