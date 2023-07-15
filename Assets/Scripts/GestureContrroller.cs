@@ -37,6 +37,9 @@ public class GestureController : MonoBehaviour
     [SerializeField]
     private float swipeDirectionSamenessThreshold = 0.6f;
 
+    [SerializeField]
+    private bool debugEnabled = true;
+
     [Header("Debug"), SerializeField]
     private TMP_Text label;
 
@@ -145,7 +148,7 @@ public class GestureController : MonoBehaviour
 
     private void DebugInfo(ActiveGesture gesture)
     {
-        if (label == null) return;
+        if (label == null || !debugEnabled) return;
 
         var builder = new StringBuilder();
 
