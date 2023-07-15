@@ -28,7 +28,6 @@ public class SpawnController : MonoBehaviour
         // Initial spawn
         Spawn();
     }
-
     private void Spawn()
     {
         Trash randomTrash = spawnables[Random.Range(0, spawnables.Length)];

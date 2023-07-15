@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 50569007100206632}
   - component: {fileID: 58997931562643256}
   m_Layer: 0
-  m_Name: GlassTrash
+  m_Name: PurpleCat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,7 +117,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0.5
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 0.1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
