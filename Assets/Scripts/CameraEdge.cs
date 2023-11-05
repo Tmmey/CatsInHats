@@ -25,8 +25,6 @@ public class CameraEdge : MonoBehaviour
 
     private void AddCollider()
     {
-        Debug.Log("Camara collider script ok");
-
         if (Camera.main == null) { Debug.LogError("Camera.main not found, failed to create edge colliders"); return; }
 
         var cam = Camera.main;

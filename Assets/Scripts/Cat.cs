@@ -29,7 +29,7 @@ public class Cat : MonoBehaviour
     protected virtual void Awake()
     {
         cachedRigidbody = GetComponent<Rigidbody2D>();
-        launchedLayerId = LayerMask.NameToLayer("FlungTrash");
+        launchedLayerId = LayerMask.NameToLayer("FlungCat");
         if (trail != null)
         {
             trail.emitting = false;
